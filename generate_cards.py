@@ -4,9 +4,10 @@ import os
 from PIL import Image, ImageDraw, ImageFont
 import random
 
-files = [f for f in os.listdir(r'D:\OneDrive\Bilder\zoo')].sort()
+folder_path = r'D:\OneDrive\Bilder\zoo'
+files = [f for f in os.listdir(folder_path)]
 # Dateien alphabetisch sortieren für konsistente Reihenfolge
-# files.sort()
+files.sort()
 
 def grab_zoo_image(n:str):
   n = int(n)
@@ -32,7 +33,7 @@ def create_card_background():
   draw.rectangle([15, 15, width-15, 80], fill='#fff', outline='#3b82f6', width=2)
 
   # Bild-Bereich (neue Sektion für das Bild)
-  draw.rectangle([15, 90, width-15, 320], fill='#ffffff', outline='#3b82f6', width=2)
+  draw.rectangle([15, 90, width-15, 320], fill='#BAD2D2', outline='#3b82f6', width=2)
 
   # Text-Bereich (verschoben nach unten)
   draw.rectangle([15, 330, width-15, height-80], fill='#ffffff', outline='#3b82f6', width=2)
@@ -177,27 +178,23 @@ def create_generic_image(width, height, card_number, name):
 
 def load_and_resize_image(image_path, target_width, target_height):
   """Lädt und skaliert ein Bild auf die gewünschte Größe"""
-  try:
-    img = Image.open(image_path)
+  img = Image.open(image_path)
 
-    # Bild proportional skalieren
-    img_ratio = img.width / img.height
-    target_ratio = target_width / target_height
+  # Bild proportional skalieren
+  img_ratio = img.width / img.height
+  target_ratio = target_width / target_height
 
-    if img_ratio > target_ratio:
-      # Bild ist breiter als das Zielformat
-      new_width = target_width
-      new_height = int(target_width / img_ratio)
-    else:
-      # Bild ist höher als das Zielformat
-      new_height = target_height
-      new_width = int(target_height * img_ratio)
+  if img_ratio > target_ratio:
+    # Bild ist breiter als das Zielformat
+    new_width = target_width
+    new_height = int(target_width / img_ratio)
+  else:
+    # Bild ist höher als das Zielformat
+    new_height = target_height
+    new_width = int(target_height * img_ratio)
 
-    img_resized = img.resize((new_width, new_height), Image.Resampling.LANCZOS)
-    return img_resized
-  except Exception as e:
-    print(f"Fehler beim Laden des Bildes {image_path}: {e}")
-    return None
+  img_resized = img.resize((new_width, new_height), Image.Resampling.LANCZOS)
+  return img_resized
 
 def wrap_text(text, font, max_width):
   """Bricht Text in mehrere Zeilen um"""
