@@ -4,6 +4,14 @@ import os
 from PIL import Image, ImageDraw, ImageFont
 import random
 
+files = [f for f in os.listdir(r'D:\OneDrive\Bilder\zoo')].sort()
+# Dateien alphabetisch sortieren für konsistente Reihenfolge
+# files.sort()
+
+def grab_zoo_image(n:str):
+  n = int(n)
+  return os.path.join(folder_path, files[n-1])
+
 def create_card_background():
   """Erstellt einen Pokemon-ähnlichen Kartenhintergrund"""
   # Kartengröße (Standard Pokemon-Karte Verhältnis)
@@ -247,7 +255,8 @@ def create_card(name, text, card_number, jpgs_dir, output_dir):
   card_image = None
 
   for ext in possible_extensions:
-    image_path = os.path.join(jpgs_dir, f"{card_number}{ext}")
+    # image_path = os.path.join(jpgs_dir, f"{card_number}{ext}")
+    image_path = grab_zoo_image(card_number)
     if os.path.exists(image_path):
       card_image = load_and_resize_image(image_path, image_width, image_height)
       if card_image:
