@@ -5,6 +5,7 @@ from PIL import Image, ImageDraw, ImageFont
 import random
 
 folder_path = r'D:\OneDrive\Bilder\zoo'
+folder_path = r'C:\Users\fv4tjay\Downloads\Brettspiel\Zoo'
 files = [f for f in os.listdir(folder_path)]
 # Dateien alphabetisch sortieren für konsistente Reihenfolge
 files.sort()
