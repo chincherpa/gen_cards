@@ -276,7 +276,7 @@ def create_card(name, text, card_number, jpgs_dir, output_dir):
   wrapped_text = wrap_text(text, text_font, 350)
 
   y_position = 340
-  line_height = 16
+  line_height = 20
   max_lines = 8  # Begrenzte Anzahl von Zeilen im Textbereich
 
   for i, line in enumerate(wrapped_text[:max_lines]):
